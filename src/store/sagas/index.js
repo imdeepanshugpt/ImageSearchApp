@@ -1,12 +1,19 @@
-import { takeEvery } from 'redux-saga/effects';
+import { put, call, takeEvery, select } from 'redux-saga/effects';
+import { fetchImages } from '../../api/fetchImageService';
+import IMAGES from '../../constants'
+import { setImages } from '../actions';
 
-// eslint-disable-next-line require-yield
-function* handleImagesLoad() {
-    console.log('fetching images from unsplash');
+const search = state => state.search;
+function* fetchImageService() {
+    const searchData = yield select(search);
+    const images = yield call(fetchImages, searchData);
+    console.log('images', images);
+    yield put(setImages(images));
 }
 function* rootSaga() {
-    yield takeEvery('FETCHING IMAGES', handleImagesLoad)
-    console.log('Hey World from root Saga');
+    console.log('Hello World from root Saga');
+    yield takeEvery(IMAGES.LOAD_IMAGES,fetchImageService);
+
 }
 
 export default rootSaga;

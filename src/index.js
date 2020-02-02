@@ -6,4 +6,13 @@ import 'react-app-polyfill/stable';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import App from './components/App';
-ReactDOM.render(<App />, document.querySelector('#root'));
+import { Provider } from 'react-redux';
+import configureStore from './store/storeConfig';
+const store = configureStore();
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+    ,
+    document.querySelector('#root'));

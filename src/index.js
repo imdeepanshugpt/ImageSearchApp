@@ -7,12 +7,15 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import App from './components/App';
 import { Provider } from 'react-redux';
-import configureStore from './store/storeConfig';
-const store = configureStore();
+import configStore from './store/storeConfig';
 
+const store = configStore();
 ReactDOM.render(
     <Provider store={store}>
         <App />
     </Provider>
     ,
-    document.querySelector('#root'));
+    document.querySelector('#root')
+);
+
+export { store };

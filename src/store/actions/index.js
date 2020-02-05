@@ -1,7 +1,7 @@
-import Images from '../../constants';
+import IMAGES from '../../constants';
 
 const setImages = (images) => ({
-    type: Images.SET_IMAGES,
+    type: IMAGES.SET_IMAGES,
     payload: images
 });
 

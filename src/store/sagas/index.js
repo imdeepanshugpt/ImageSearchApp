@@ -1,19 +1,14 @@
-import { put, call, takeEvery, select } from 'redux-saga/effects';
+import { put, call, takeEvery } from 'redux-saga/effects';
 import { fetchImages } from '../../api/fetchImageService';
 import IMAGES from '../../constants'
 import { setImages } from '../actions';
 
-const search = state => state.search;
-function* fetchImageService() {
-    const searchData = yield select(search);
-    const images = yield call(fetchImages, searchData);
-    console.log('images', images);
+function* fetchImageService(action) {
+    const images = yield call(fetchImages, action.payload);
     yield put(setImages(images));
 }
 function* rootSaga() {
-    console.log('Hello World from root Saga');
-    yield takeEvery(IMAGES.LOAD_IMAGES,fetchImageService);
-
+    yield takeEvery(IMAGES.LOAD_IMAGES, fetchImageService);
 }
 
 export default rootSaga;
